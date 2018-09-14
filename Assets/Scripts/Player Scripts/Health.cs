@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using EZCameraShake;
+using System;
 
 // Scriptet holder styr på Health og viser Health værdi på skærmen.
 public class Health : MonoBehaviour {
@@ -15,18 +16,24 @@ public class Health : MonoBehaviour {
 	public bool destroyObject = false;
 
     public CameraShaker cameraShaker;
+    public ParticleSystem deathParticles;
 
-	// void Update: Hver gang der tegnes et nyt billede.
-	void Update () {
-		// Hvis Health er mindre eller lig med 0 går spillet videre til scenen "Lose".
-		if (healthValue <= 0)
-		{
-			if (loseGame) {
-				SceneManager.LoadScene ("Lose");
-			}
-			if(destroyObject) {
-				KillMe (); // Kalder funktionen "KillMe"
-			}
+    public Action OnDeath;
+
+    bool isDead = false;
+    
+    void Update () {
+		if (healthValue <= 0 && !isDead) {
+            isDead = true;
+
+            //Spawn particles
+            if (deathParticles != null) {
+                GameObject gm = Instantiate(deathParticles, transform.position, deathParticles.transform.rotation).gameObject;
+                Destroy(gm, 2f);
+            }
+
+            if (OnDeath != null)
+                OnDeath();
 		}
 	}
 
@@ -39,11 +46,4 @@ public class Health : MonoBehaviour {
         }
 		healthValue = healthValue - damage;
 	}
-
-	// Funktion som bruges når objektet skal ødelægges.
-	// Her kan man fx tilføje en animation afspilning inden man kalder Destroy() funktionen
-	private void KillMe() {
-		Destroy (gameObject);
-	}
-
 }

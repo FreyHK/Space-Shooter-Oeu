@@ -17,7 +17,11 @@ public class EnemySpawner : MonoBehaviour {
 
     float cooldown = 0f;
 
-	void Update () {
+    float gameTime = 0f;
+
+    void Update () {
+        gameTime += Time.unscaledDeltaTime;
+
         DestroyChildren();
 
         cooldown -= Time.deltaTime;
@@ -50,13 +54,11 @@ public class EnemySpawner : MonoBehaviour {
             Transform t = Instantiate(enemyPrefab, transform);
             t.position = Random.onUnitSphere + transform.position;
 
-            //After 180s enemies respawn instantly
-            float time = Mathf.Clamp01(Time.unscaledTime / 60f);
+            //After 60s enemies respawn instantly
+            float time = Mathf.Clamp01(gameTime / 60f);
             //Invert
             float sample = (1f - SpawnRateOverTime.Evaluate(time));
             cooldown = sample * MaxSpawnRate;
-
-            //print("Set cooldown: " + cooldown);
         }
     }
 }

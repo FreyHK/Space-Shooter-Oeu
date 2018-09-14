@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4766812509500888, guid: 30f0476154ffa4247bdf724023e3b734,
     type: 2}
-  MaxSpawnRate: 8
+  MaxSpawnRate: 4
   SpawnRateOverTime:
     serializedVersion: 2
     m_Curve:
@@ -79,7 +79,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  debug: 0
 --- !u!212 &212409444476114042
 SpriteRenderer:
   m_ObjectHideFlags: 1

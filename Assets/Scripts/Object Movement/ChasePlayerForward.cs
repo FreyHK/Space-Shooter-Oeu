@@ -16,7 +16,6 @@ public class ChasePlayerForward : MonoBehaviour {
 
     Rigidbody2D body;
 
-
     public enum AI_Type
     {
         Follow,
@@ -44,31 +43,45 @@ public class ChasePlayerForward : MonoBehaviour {
         AI = (AI_Type)Random.Range(0, 4);
     }
 
+    Vector2 HeadingDir = Vector2.right;
+
     void Update() {
-        // Beregn retningen mod spilleren.
-        Vector2 retning = Vector2.zero;
 
-        switch (AI)
-        {
-            case AI_Type.Follow:
-                retning = Follow();
-                break;
-            case AI_Type.CopyDirection:
-                retning = CopyDirection();
-                break;
-            case AI_Type.PredictPlayer:
-                retning = PredictPlayer();
-                break;
-            case AI_Type.Wander:
-                retning = Wander();
-                break;
-        }
-
-        // Normalize betyder at vektoren gives længden 1, men retning bibeholdes.
-        retning.Normalize();
+        if (Player != null)
+            UpdateHeadingDirection();
 
         // Bevæger objektet i den beregnede retning, med den indstillede hastighed.
-        body.MovePosition(body.position + retning * moveSpeed * Time.deltaTime);
+        body.MovePosition(body.position + HeadingDir * moveSpeed * Time.deltaTime);
+    }
+
+    void UpdateHeadingDirection () {
+        Vector2 dir = Vector2.zero;
+
+        switch (AI) {
+            case AI_Type.Follow:
+                dir = Follow();
+                break;
+            case AI_Type.CopyDirection:
+                dir = CopyDirection();
+                break;
+            case AI_Type.PredictPlayer:
+                dir = PredictPlayer();
+                break;
+            case AI_Type.Wander:
+                dir = Wander();
+                break;
+        }
+        //We want to lerp 'HeadingDir' towards this new value
+        SetTargetDir(dir);
+    }
+
+    float lerpSpeed = 1f;
+
+    void SetTargetDir (Vector2 d) {
+        // Normalize betyder at vektoren gives længden 1, men retning bibeholdes.
+        d.Normalize();
+        HeadingDir = Vector2.Lerp(HeadingDir, d, Time.deltaTime * lerpSpeed);
+        HeadingDir.Normalize();
     }
 
     Vector2 preferredDir = Vector2.zero;
@@ -87,8 +100,8 @@ public class ChasePlayerForward : MonoBehaviour {
 
     Vector2 CopyDirection()
     {
-        Vector2 retning = Player.transform.position - transform.position;
-        retning += (Vector2)Player.transform.up * randomWeight;
+        Vector2 retning = (Vector2)Player.transform.up * randomWeight; //Player.transform.position - transform.position;
+        //retning += (Vector2)Player.transform.up * randomWeight;
 
         return retning;
     }
@@ -106,11 +119,7 @@ public class ChasePlayerForward : MonoBehaviour {
         return retning;
     }
 
-    Vector2 Wander()
-    {
-        if (preferredDir == Vector2.zero)
-            preferredDir = (Vector2)Random.onUnitSphere;
-
-        return preferredDir;
+    Vector2 Wander() {
+        return (Vector2)Random.onUnitSphere;
     }
 }

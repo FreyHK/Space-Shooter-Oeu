@@ -601,8 +601,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 100
   loseGame: 1
-  destroyObject: 0
+  destroyObject: 1
   cameraShaker: {fileID: 1302421791}
+  deathParticles: {fileID: 198197682827633974, guid: 8b1be8b793f7b414b94ddf92b0ca273c,
+    type: 2}
 --- !u!81 &545272441
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1003,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4135958980448440, guid: 4dd5f2de709bf314da30fbf11689c341, type: 2}
-  Count: 500
+  Count: 1000
   RandomRotation: 1
   Root: {fileID: 1221406191}
   ChunkSize: 50
@@ -1066,6 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0bf0ccdc86945e788fbea8a79793b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerHealth: {fileID: 545272440}
   SpeedOverTime:
     serializedVersion: 2
     m_Curve:
