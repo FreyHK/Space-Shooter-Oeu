@@ -25,15 +25,16 @@ public class DealDamage : MonoBehaviour {
         //Destroy rock if that's what we hit
         if (ting.gameObject.tag == "Rock")
             Destroy(ting.gameObject);
-
-        //Spawn particles
-        if (particles != null)
-        {
-            GameObject gm = Instantiate(particles, transform.position, particles.transform.rotation).gameObject;
-            Destroy(gm, 1f);
-        }
-
+        
         //Destroy enemy (ourselves)
         Destroy(gameObject);
 	}
+
+    private void OnDestroy() {
+        //Spawn particles
+        if (particles != null) {
+            GameObject gm = Instantiate(particles, transform.position, particles.transform.rotation).gameObject;
+            Destroy(gm, 1f);
+        }
+    }
 }

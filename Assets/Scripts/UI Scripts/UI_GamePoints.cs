@@ -12,7 +12,7 @@ public class UI_GamePoints : MonoBehaviour {
 	void Start() {
 		pointsText.text = points.ToString (); // Display the current points
 	}
-
+    
 	public void AddPoints(int pointsToAdd) {
 		points += pointsToAdd;
 		pointsText.text = points.ToString ();
@@ -20,7 +20,6 @@ public class UI_GamePoints : MonoBehaviour {
 
 	public void ResetPoints() {
 		points = 0;
-		pointsText.text = points.ToString ();
 	}
 
 	public int GetPoints() {

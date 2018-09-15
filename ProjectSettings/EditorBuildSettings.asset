@@ -15,12 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 41405d218996040489d4214159d7b66d
   - enabled: 1
-    path: Assets/Scenes/Forward Game.unity
-    guid: 4ff8a0d97925d4649a26ed49ed39108d
+    path: Assets/Scenes/ChunkSystem_Test.unity
+    guid: 450012810e7fd3b40a6269da0a389ce1
   - enabled: 1
     path: Assets/Scenes/Lose.unity
     guid: 90261ef53bd741c4290d1230ead9e5c3
   - enabled: 0
-    path: Assets/Scenes/Win.unity
-    guid: e1303fc554383c5469452e9ba424fa26
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

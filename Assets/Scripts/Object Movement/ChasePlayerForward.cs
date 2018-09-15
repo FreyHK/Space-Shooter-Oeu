@@ -100,7 +100,7 @@ public class ChasePlayerForward : MonoBehaviour {
 
     Vector2 CopyDirection()
     {
-        Vector2 retning = (Vector2)Player.transform.up * randomWeight; //Player.transform.position - transform.position;
+        Vector2 retning = (Vector2)Player.transform.up; //Player.transform.position - transform.position;
         //retning += (Vector2)Player.transform.up * randomWeight;
 
         return retning;

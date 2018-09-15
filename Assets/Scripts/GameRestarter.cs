@@ -10,9 +10,18 @@ public class GameRestarter : MonoBehaviour {
 	}
 	
 	void Update () {
-		
+
         //Load first level (Game)
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            UI_GamePoints points = FindObjectOfType<UI_GamePoints>();
+            if (points != null)
+                points.ResetPoints();
+
+            UI_GameTime time = FindObjectOfType<UI_GameTime>();
+            if (time != null)
+                time.ResetTimer();
+            
             SceneManager.LoadScene(1);
+        }
     }
 }

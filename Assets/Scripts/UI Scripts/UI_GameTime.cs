@@ -12,7 +12,7 @@ public class UI_GameTime : MonoBehaviour {
 
 	void Start() {
 		if(displayFinalTime) {
-			timerText.text = timer.ToString ("F2"); // Displays the time spent with 2 digits (e.g. "215.23" or "5.80")
+			timerText.text = timer.ToString ("F2");
 		}
 	}
 
@@ -23,4 +23,7 @@ public class UI_GameTime : MonoBehaviour {
 		}
 	}
 
+    public void ResetTimer () {
+        timer = 0f;
+    }
 }

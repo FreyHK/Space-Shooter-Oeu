@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour {
 
     public Health PlayerHealth;
 
-
     public AnimationCurve SpeedOverTime;
 
     private void Start() {
@@ -35,7 +34,6 @@ public class GameController : MonoBehaviour {
         PlayerHealth.gameObject.SetActive(false);
         
         yield return new WaitForSecondsRealtime(3f);
-        print("Load");
         
         SceneManager.LoadScene("Lose");
     }

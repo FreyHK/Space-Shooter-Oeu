@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1bedec94b49d84082dcdc488df4c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 20
   particles: {fileID: 198722596860726856, guid: 57c6960c56ea94116918bd27d80711f9,
     type: 2}
 --- !u!114 &114938498948459328
