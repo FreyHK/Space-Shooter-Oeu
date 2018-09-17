@@ -257,7 +257,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefabs:
-  - {fileID: 4135958980448440, guid: 4dd5f2de709bf314da30fbf11689c341, type: 2}
+  - {fileID: 4511360169397416, guid: cf5328d743520164680c2e1def047757, type: 2}
+  - {fileID: 4296219157840092, guid: 2f425038ef7d96248a33a877076a4e91, type: 2}
+  - {fileID: 4066803152615638, guid: 3767073d74ab59e4e8faba3f11d9cad4, type: 2}
+  MixPrefabs: 0
   Count: 40
   RandomRotation: 1
 --- !u!114 &114888839565051782
@@ -274,6 +277,7 @@ MonoBehaviour:
   Prefabs:
   - {fileID: 4120791069730788, guid: ae5f50a66115ae147a85ef0de4f1e10f, type: 2}
   - {fileID: 4023329371018276, guid: c193d6e2dfed86141ada2cb74b290f36, type: 2}
+  MixPrefabs: 1
   Count: 1
   RandomRotation: 0
 --- !u!114 &114961373364751966
@@ -289,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefabs:
   - {fileID: 4000060983739220, guid: 2b13e302aa0a8491f962a3411eb209d8, type: 2}
+  MixPrefabs: 1
   Count: 8
   RandomRotation: 1
 --- !u!114 &114992883308485966
@@ -304,5 +309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefabs:
   - {fileID: 4093415485714286, guid: 851febc6f688ab04888afd3d0808a12f, type: 2}
-  Count: 16
+  MixPrefabs: 1
+  Count: 20
   RandomRotation: 1

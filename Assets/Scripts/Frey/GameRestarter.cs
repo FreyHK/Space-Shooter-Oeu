@@ -16,10 +16,6 @@ public class GameRestarter : MonoBehaviour {
             UI_GamePoints points = FindObjectOfType<UI_GamePoints>();
             if (points != null)
                 points.ResetPoints();
-
-            UI_GameTime time = FindObjectOfType<UI_GameTime>();
-            if (time != null)
-                time.ResetTimer();
             
             SceneManager.LoadScene(1);
         }

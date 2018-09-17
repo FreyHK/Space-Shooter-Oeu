@@ -8,8 +8,9 @@ public class EnemySpawner : MonoBehaviour {
 
     public Transform enemyPrefab;
 
-    public float MaxSpawnRate = 8f;
-    public AnimationCurve SpawnRateOverTime;
+    public TimedVariable SpawnDelay = new TimedVariable();
+
+    //public float MaxSpawnRate = 8f;
 
     void Start () {
         player = FindObjectOfType<PlayerControlForward>().transform;
@@ -17,11 +18,7 @@ public class EnemySpawner : MonoBehaviour {
 
     float cooldown = 0f;
 
-    float gameTime = 0f;
-
     void Update () {
-        gameTime += Time.unscaledDeltaTime;
-
         DestroyChildren();
 
         cooldown -= Time.deltaTime;
@@ -45,20 +42,16 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
 
-    int maxChildCount = 5;
+    public int MaxChildCount = 8;
 
     void TrySpawnEnemy () {
         float dist = Vector2.Distance(player.position, transform.position);
 
-        if (transform.childCount < maxChildCount && dist < destroyRange && dist > spawnRange) {
+        if (transform.childCount < MaxChildCount && dist < destroyRange && dist > spawnRange) {
             Transform t = Instantiate(enemyPrefab, transform);
             t.position = Random.onUnitSphere + transform.position;
-
-            //After 60s enemies respawn instantly
-            float time = Mathf.Clamp01(gameTime / 60f);
-            //Invert
-            float sample = (1f - SpawnRateOverTime.Evaluate(time));
-            cooldown = sample * MaxSpawnRate;
+       
+            cooldown = SpawnDelay.GetValue(GameController.GameTime);
         }
     }
 }

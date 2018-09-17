@@ -11,21 +11,28 @@ public class GameController : MonoBehaviour {
 
     private void Start() {
         PlayerHealth.OnDeath += OnPlayerDeath;
+        //Reset timer
+        GameTime = 0f;
+        IsGameOver = false;
     }
+
+    bool IsGameOver = false;
 
     void Update () {
-        UpdateGameSpeed();
+        if (!IsGameOver)
+            UpdateGameTime();
     }
 
-    float gameTime = 0f;
+    public static float GameTime = 0f;
 
-    void UpdateGameSpeed() {
-        gameTime += Time.unscaledDeltaTime;
-        float t = Mathf.Clamp01(gameTime / 180f);
-        Time.timeScale = 1f + SpeedOverTime.Evaluate(t);
+    void UpdateGameTime() {
+        GameTime += Time.unscaledDeltaTime;
+        //float t = Mathf.Clamp01(gameTime / 180f);
+        //Time.timeScale = 1f + SpeedOverTime.Evaluate(t);
     }
 
     void OnPlayerDeath () {
+        IsGameOver = true;
         StartCoroutine(EndGame());
     }
 

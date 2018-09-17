@@ -11,20 +11,20 @@ public class DealDamage : MonoBehaviour {
     public ParticleSystem particles;
 	
 	//når noget colliderer med det her objekt bliver det betegnet "ting"
-	private void OnCollisionEnter2D (Collision2D ting)
+	private void OnCollisionEnter2D (Collision2D col)
     {
-        if (ting.gameObject.tag != "Player" && ting.gameObject.tag != "Rock" && ting.gameObject.tag != "Enemy")
+        if (col.gameObject.tag != "Player" && col.gameObject.tag != "Rock" && col.gameObject.tag != "Enemy")
             return;
         
 		//Hvis "ting" har et tag, der hedder "Player" sendes Damage til funktionen ReceiveDamage i scriptet Health på Player
-		if (ting.gameObject.tag == "Player")
+		if (col.gameObject.tag == "Player")
 		{
-			ting.gameObject.GetComponent<Health>().ReceiveDamage(Damage);
+			col.gameObject.GetComponent<Health>().ReceiveDamage(Damage);
         }
 
         //Destroy rock if that's what we hit
-        if (ting.gameObject.tag == "Rock")
-            Destroy(ting.gameObject);
+        //if (col.gameObject.tag == "Rock")
+        //    Destroy(col.gameObject);
         
         //Destroy enemy (ourselves)
         Destroy(gameObject);

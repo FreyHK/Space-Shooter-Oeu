@@ -8,9 +8,10 @@ public class ChasePlayerForward : MonoBehaviour {
     private PlayerControlForward Player;
 
     // Hastigheden, som vi skal bevæge os med.
-    public float MinMovementSpeed = 2f;
-    public float MaxMovementSpeed = 4f;
-    float moveSpeed;
+    public TimedVariable MoveSpeed = new TimedVariable();
+
+    //Higher value = faster reaction time
+    public TimedVariable ReactionSpeed = new TimedVariable();
 
     float randomWeight = 1f;
 
@@ -32,7 +33,6 @@ public class ChasePlayerForward : MonoBehaviour {
         Player = FindObjectOfType<PlayerControlForward>();
 
         randomWeight = Random.Range(2.5f, 10f);
-        moveSpeed = Random.Range(MinMovementSpeed, MaxMovementSpeed);
 
         //Set starting AI
         SelectAI();
@@ -50,6 +50,7 @@ public class ChasePlayerForward : MonoBehaviour {
         if (Player != null)
             UpdateHeadingDirection();
 
+        float moveSpeed = MoveSpeed.GetValue(GameController.GameTime);
         // Bevæger objektet i den beregnede retning, med den indstillede hastighed.
         body.MovePosition(body.position + HeadingDir * moveSpeed * Time.deltaTime);
     }
@@ -75,12 +76,11 @@ public class ChasePlayerForward : MonoBehaviour {
         SetTargetDir(dir);
     }
 
-    float lerpSpeed = 1f;
-
     void SetTargetDir (Vector2 d) {
         // Normalize betyder at vektoren gives længden 1, men retning bibeholdes.
         d.Normalize();
-        HeadingDir = Vector2.Lerp(HeadingDir, d, Time.deltaTime * lerpSpeed);
+        float speed = ReactionSpeed.GetValue(GameController.GameTime);
+        HeadingDir = Vector2.Lerp(HeadingDir, d, Time.deltaTime * speed);
         HeadingDir.Normalize();
     }
 

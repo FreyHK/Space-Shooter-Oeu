@@ -31,6 +31,9 @@ public class Health : MonoBehaviour {
                 GameObject gm = Instantiate(deathParticles, transform.position, deathParticles.transform.rotation).gameObject;
                 Destroy(gm, 2f);
             }
+            //Shake camera
+            if (cameraShaker != null)
+                cameraShaker.ShakeOnce(15f, 5f, 0f, .5f);
 
             if (OnDeath != null)
                 OnDeath();
@@ -41,9 +44,8 @@ public class Health : MonoBehaviour {
 	public void ReceiveDamage (int damage) 
 	{
         if (cameraShaker != null)
-        {
-            cameraShaker.ShakeOnce(10f, 1f, 0f, .5f);
-        }
+            cameraShaker.ShakeOnce(15f, 1f, 0f, .5f);
+
 		healthValue = healthValue - damage;
 	}
 }
